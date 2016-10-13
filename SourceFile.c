@@ -5,14 +5,11 @@ int speed = 2;
 void moveRobot()
 {
 	motor[rightDriveMotor] = (vexRT[Ch3] - vexRT[Ch4])/speed;
-  motor[leftDriveMotor]  = (vexRT[Ch3] + vexRT[Ch4])/speed;
+  	motor[leftDriveMotor]  = (vexRT[Ch3] + vexRT[Ch4])/speed;
 }
-
-task main()
+void buttons()
 {
-	while(1 == 1)
-  {
-  	if (vexRT[Btn8L] == 1){ //Go into "precision mode" (half default speed)
+	if (vexRT[Btn8L] == 1){ //Go into "precision mode" (half default speed)
   	speed = 4;
   	}
   	if (vexRT[Btn8U] == 1){ //Go into "safety mode" (No movement, throttled by motors)
@@ -24,6 +21,13 @@ task main()
   	if (vexRT[Btn8D] == 1){	//Return to normal speed (default speed)
   	speed = 2;
   	}
+}
+
+task main()
+{
+	while(1 == 1)
+  {
+  	buttons();
   	moveRobot();
   }
 }
